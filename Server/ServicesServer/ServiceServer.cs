@@ -37,6 +37,40 @@ namespace BlazorBasicSqlServer.Server.ServicesServer
             {
                 return null!;
             }
-        }        
+        }     
+        
+        // Vídeo #37.
+        // Saber se na tabela existe um único aluno que atende a uma condição específica. {id1}
+        public async Task<Alunos> GetSingleAsync(int id1)
+        {
+            try
+            {
+                // Verificar se a tabela contém alunos.
+                if (await _dataContext.TblTeste3.AnyAsync())
+                {
+                    return await _dataContext.TblTeste3.SingleAsync(x => x.Id== id1);
+                }
+                else
+                {
+                    return null!;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception($"Não há na tabela um único aluno que atende a essa condição: {id1}");
+            }
+        }
+
+        // Saber a média das idades dos alunos.
+        public async Task<double> GetMedia()
+        {
+            return await _dataContext.TblTeste3.AverageAsync(x => x.Idade);
+        }
+
+        // Saber a soma das idades dos alunos.
+        public async Task<int> GetSoma()
+        {
+            return await _dataContext.TblTeste3.SumAsync(x => x.Idade);
+        }
     }
 }

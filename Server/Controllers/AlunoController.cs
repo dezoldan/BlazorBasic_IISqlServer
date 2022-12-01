@@ -33,6 +33,27 @@ namespace BlazorBasicSqlServer.Server.Controllers
         public async Task<ActionResult<Alunos>> GetFirst2(int id1)
         {
             return await _serviceServer.GetFirst2(id1);
-        }  
+        }
+
+        // Saber se na tabela existe um único aluno que atende a uma condição específica. {id1}
+        [HttpGet("single/{id1:int}")]
+        public async Task<ActionResult<Alunos>> GetSingleAsync([FromRoute] int id1)
+        {
+            return await _serviceServer.GetSingleAsync(id1);    
+        }
+
+        // Saber a média das idades dos alunos.
+        [HttpGet("media")]
+        public async Task<ActionResult<double>> GetMedia()
+        {
+            return await _serviceServer.GetMedia();
+        }
+
+        // Saber a soma das idades dos alunos.
+        [HttpGet("soma")]
+        public async Task<ActionResult<int>> GetSoma()
+        {
+            return await _serviceServer.GetSoma();
+        }
     }
 }
